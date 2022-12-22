@@ -42,20 +42,25 @@ const carousel = document.getElementById('carousel');
 const up = document.getElementById('up');
 const down = document.getElementById('down');
 
-
+// *FUNZIONI ---------------------------------------------------------------------
+// creo funzione per generare card
+const getCard = (information) => {
+  const card =  
+  ` <div class="card">
+      <img src="${information.image}" alt="${information.title}">
+      <div class="text">
+        <h1> ${information.title} </h1>
+        <p>${information.text}</p>
+      </div>
+    </div>
+  ` 
+  return card;
+};
 // genero card
 let cardElement = '';
 for( let i = 0; i < data.length ; i++){
   const cover = data[i];
-  cardElement += 
-  `<div class="card">
-     <img src="${cover.image}" alt="${cover.title}">
-     <div class="text">
-        <h1> ${cover.title} </h1>
-        <p>${cover.text}</p>
-     </div>
-   </div>
-  ` 
+  cardElement += getCard(cover);
 };
 carousel.innerHTML = cardElement;
 
