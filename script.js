@@ -36,3 +36,65 @@ const data = [
     text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
   }
 ];
+//*  PRENDO ELEMENTI DAL DOM----------------------------------------------------
+
+const carousel = document.getElementById('carousel');
+const up = document.getElementById('up');
+const down = document.getElementById('down');
+
+
+// genero card
+let cardElement = '';
+for( let i = 0; i < data.length ; i++){
+  const cover = data[i];
+  cardElement += 
+  `<div class="card">
+     <img src="${cover.image}" alt="${cover.title}">
+     <div class="text">
+        <h1> ${cover.title} </h1>
+        <p>${cover.text}</p>
+     </div>
+   </div>
+  ` 
+};
+carousel.innerHTML = cardElement;
+
+
+// recupero card
+const card = document.querySelectorAll('.card');
+// metto la prima card active
+let currentActiveIndex = 0;
+card[currentActiveIndex].classList.add('active');
+
+
+
+
+//*aggiungo event listener alle frecce ---------------------------------------------
+down.addEventListener('click', () => {
+  // rimuovo classe active 
+  card[currentActiveIndex].classList.remove('active');
+
+  // incremento l'indice
+  currentActiveIndex++;
+  // riporto l'indice a zero quando finiscono le img
+  if(currentActiveIndex === card.length) currentActiveIndex = 0;
+
+  // aggiungo classe active
+  card[currentActiveIndex].classList.add('active');
+
+});
+
+up.addEventListener('click', () => {
+  // rimuovo classe active 
+  card[currentActiveIndex].classList.remove('active');
+
+  // incremento l'indice
+  currentActiveIndex--;
+  // riporto l'indice a zero quando finiscono le img
+  if(currentActiveIndex < 0) currentActiveIndex = card.length -1;
+
+  // aggiungo classe active
+  card[currentActiveIndex].classList.add('active');
+
+});
+
